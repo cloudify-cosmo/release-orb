@@ -3,31 +3,48 @@ description: >
 # What will this command do?
 # Descriptions should be short, simple, and clear.
 steps:
+  - attach_workspace:
+      at: workspace
+  - run:
+      name: Git checkout
+      command: git checkout ${CIRCLE_BRANCH}
+  - run:
+      name: "Pull Submodules"
+      command: |
+        git submodule init
+        git submodule update --remote --recursive
   - run:
       name: Set Python
       command: |
-        if ! command -v COMMAND &> /dev/null
+        if ! pyenv -v COMMAND &> /dev/null
         then
-            echo "COMMAND could not be found"
+            echo "pyenv could not be found"
             exit
         else
             pyenv global 3.6.5
         fi
   - run:
-      name: Git checkout
-      command: git checkout ${CIRCLE_BRANCH}
+      name: Download pip
+      command: curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
   - run:
-      name: upgrade pip
-      command: pip3 install --upgrade pip3
+      name: Install pip
+      command: sudo python get-pip.py
+  - run:
+      name: Install virtualenv
+      command: pip install --user virtualenv
+  - run:
+      name: Init virtualenv
+      command: virtualenv env
+  - run:
+      name: install tox
+      command: pip install --user pygithub pyyaml==3.10
   - run:
       name: upgrade setuptools
-      command: pip3 install --upgrade setuptools
+      command: pip install --upgrade setuptools
   - run:
-      name: Install tox
-      command: pip3 install tox
-  - run:
-      name: Run flake8 test
-      command: /home/circleci/.local/bin/tox -e linting
-  - run:
-      name: Run py36 test
-      command: /home/circleci/.local/bin/tox -e unittesting
+      name: install local project
+##      command: pip install https://github.com/cloudify-incubator/cloudify-ecosystem-test/archive/latest.zip
+      command: pip install git+https://github.com/cloudify-incubator/cloudify-ecosystem-test/tree/RD-2407-merge-docs-orb
+  - attach_workspace:
+      at: workspace
+  - run: ecosystem-test merge-docs -B='fake-master'
