@@ -46,4 +46,4 @@ steps:
       command: pip install https://github.com/cloudify-incubator/cloudify-ecosystem-test/archive/latest.zip
   - attach_workspace:
       at: workspace
-  - run: ecosystem-test merge-docs
+  - run: ecosystem-test merge-docs -B='fake-master'
