@@ -1,7 +1,7 @@
 description: >
   Generate a wagon
 
-executor: arm_wagon_generator
+executor: py36
 
 steps:
   - gh/install

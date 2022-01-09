@@ -1,7 +1,7 @@
 description: >
   Generate a wagon
 
-executor: wagon_generator
+executor: py36
 
 steps:
   - gh/install
