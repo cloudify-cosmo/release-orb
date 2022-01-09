@@ -22,7 +22,7 @@ steps:
   - run:
       name: upgrade setuptools
       command: pip3 install --upgrade setuptools
-    - run:
+  - run:
       name: Install tox
       command: pip3 install tox
   - run:
