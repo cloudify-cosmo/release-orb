@@ -44,7 +44,7 @@ steps:
   - run:
       name: install local project
 ##      command: pip install https://github.com/cloudify-incubator/cloudify-ecosystem-test/archive/latest.zip
-      command: pip install git+https://github.com/cloudify-incubator/cloudify-ecosystem-test/tree/RD-2407-merge-docs-orb
+      command: pip install https://github.com/cloudify-incubator/cloudify-ecosystem-test/archive/RD-2407-merge-docs-orb.zip
   - attach_workspace:
       at: workspace
   - run: ecosystem-test merge-docs -B='fake-master'
