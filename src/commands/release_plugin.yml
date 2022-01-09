@@ -1,0 +1,48 @@
+description: >
+  This command releases a plugin
+steps:
+  - run:
+      name: "Pull Submodules"
+      command: |
+        git submodule init
+        git submodule update --remote --recursive
+  - run:
+      name: Set Python
+      command: |
+        if ! pyenv -v COMMAND &> /dev/null
+        then
+            echo "pyenv could not be found"
+            exit
+        else
+            pyenv global 3.6.5
+        fi
+  - run:
+      name: Git checkout
+      command: git checkout ${CIRCLE_BRANCH}
+  - run:
+      name: Download pip
+      command: curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+  - run:
+      name: Install pip
+      command: sudo python get-pip.py
+  - run:
+      name: update pip
+      command: pip install -U pip===20.3.3
+  - run:
+      name: Install virtualenv
+      command: pip install --user virtualenv
+  - run:
+      name: Init virtualenv
+      command: virtualenv env
+  - run:
+      name: install tox
+      command: pip install --user pygithub pyyaml==3.10
+  - run:
+      name: upgrade setuptools
+      command: pip install --upgrade setuptools
+  - run:
+      name: install local project
+      command: pip install https://github.com/cloudify-incubator/cloudify-ecosystem-test/archive/latest.zip
+  - attach_workspace:
+      at: workspace
+  - run: ecosystem-tests package-release --name ${CIRCLE_PROJECT_REPONAME}

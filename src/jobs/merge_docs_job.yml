@@ -1,0 +1,10 @@
+description: >
+  Generate a wagon
+
+executor: py36
+
+steps:
+  - gh/install
+  - gh/setup
+  - gh/clone
+  - merge_docs
