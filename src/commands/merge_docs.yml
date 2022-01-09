@@ -47,4 +47,4 @@ steps:
       command: pip install https://github.com/cloudify-incubator/cloudify-ecosystem-test/archive/RD-2407-merge-docs-orb.zip
   - attach_workspace:
       at: workspace
-  - run: ecosystem-test merge-docs -B='fake-master'
+  - run: ecosystem-test merge-docs -B 'fake-master'
