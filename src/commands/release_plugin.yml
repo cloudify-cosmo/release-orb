@@ -45,4 +45,4 @@ steps:
       command: pip install https://github.com/cloudify-incubator/cloudify-ecosystem-test/archive/latest.zip
   - attach_workspace:
       at: workspace
-  - run: ecosystem-tests package-release --name ${CIRCLE_PROJECT_REPONAME}
+  - run: ecosystem-tests package-release --name ${CIRCLE_PROJECT_REPONAME} -v2
