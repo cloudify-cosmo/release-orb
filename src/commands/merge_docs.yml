@@ -24,12 +24,6 @@ steps:
             pyenv global 3.6.5
         fi
   - run:
-      name: Download pip
-      command: curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-  - run:
-      name: Install pip
-      command: sudo python get-pip.py
-  - run:
       name: Install virtualenv
       command: pip install --user virtualenv
   - run:
