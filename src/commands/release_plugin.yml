@@ -1,6 +1,8 @@
 description: >
   This command releases a plugin
 steps:
+  - attach_workspace:
+      at: workspace
   - run:
       name: "Pull Submodules"
       command: |
