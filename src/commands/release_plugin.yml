@@ -1,13 +1,13 @@
 description: >
   This command releases a plugin
 steps:
-  - attach_workspace:
-      at: workspace
   - run:
       name: "Pull Submodules"
       command: |
         git submodule init
         git submodule update --remote --recursive
+  - attach_workspace:
+      at: workspace
   - run:
       name: Set Python
       command: |
