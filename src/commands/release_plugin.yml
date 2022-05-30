@@ -42,4 +42,7 @@ steps:
   - attach_workspace:
       at: workspace
   - run: ecosystem-tests package-release --name ${CIRCLE_PROJECT_REPONAME} -v2
+  - run: ecosystem-test upload-assets --repo cloudify-docker-plugin --org cloudify-cosmo
+  - run: ecosystem-test upload-assets --repo cloudify-docker-plugin --org cloudify-cosmo --release latest
   - run: ecosystem-test generate-plugins-json --upload-to-s3
+  - run: ecosystem-test generate-plugins-json --upload-to-s3 --plugins-yaml-version v2
