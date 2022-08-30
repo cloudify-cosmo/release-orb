@@ -2,7 +2,7 @@ description: >
   This command releases a plugin
 steps:
   - run:
-      name: Add the submodules.
+      name: Add submodules
       command: git submodule update --init --recursive
   - attach_workspace:
       at: workspace
