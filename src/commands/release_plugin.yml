@@ -43,4 +43,6 @@ steps:
   - run: ecosystem-test upload-assets --repo ${CIRCLE_PROJECT_REPONAME} --org ${CIRCLE_PROJECT_USERNAME}
   - run: ecosystem-test upload-assets --repo ${CIRCLE_PROJECT_REPONAME} --org ${CIRCLE_PROJECT_USERNAME} --release latest
   - run: ecosystem-test generate-plugins-json --upload-to-s3
+  - run: ecosystem-test verify-plugins-json --name ${CIRCLE_PROJECT_REPONAME}
   - run: ecosystem-test generate-plugins-json --upload-to-s3 --plugins-yaml-version v2
+  - run: ecosystem-test verify-plugins-json --name ${CIRCLE_PROJECT_REPONAME}  --plugins-yaml-version v2
